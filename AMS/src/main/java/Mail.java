@@ -16,22 +16,22 @@ public class Mail {
     Session newSession = null;
     MimeMessage mimeMessage = null;
    public static void main(String[] args) {
-        Mail mail = new Mail();
-        mail.setupSeverProperties();
-        try {
-
-            mail.draftEmail();
-            mail.sendEmail();
-    
-        } catch (Exception ex){
-            ex.printStackTrace();
-        }
+//        Mail mail = new Mail();
+//        mail.setupSeverProperties();
+//        try {
+//
+//            mail.draftEmail();
+//            mail.sendEmail();
+//    
+//        } catch (Exception ex){
+//            ex.printStackTrace();
+//        }
    }
 
    void sendEmail() throws MessagingException {
 
-        String from = "attendancems123@gmail.com";
-        String fromPassword = "mmbsodskafhatiqq";
+        String from = "aianlouisealfaro.iskolar@gmail.com";
+        String fromPassword = "jbbyrkdpmquyplhj";
         String emailHost = "smtp.gmail.com";
 
         Transport transport = newSession.getTransport("smtp");
@@ -43,11 +43,13 @@ public class Mail {
 
    }
 
-   MimeMessage draftEmail() throws AddressException, MessagingException{
-        String to = "2021301205@dhvsu.edu.ph";
+   MimeMessage draftEmail(int code) throws AddressException, MessagingException{
+        String to = "aianlouisealfaro03@gmail.com";
         String subject = "Test Mail";
-
-        String body = "Test Body Your Pincode is: ";
+        
+        String i = String.valueOf(code);
+        
+        String body = "Your Pincode is: " + i;
 
         mimeMessage = new MimeMessage(newSession);
 
