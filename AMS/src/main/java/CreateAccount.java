@@ -27,7 +27,7 @@ public class CreateAccount extends javax.swing.JFrame {
         initComponents();
         conn = AMS.connectmysqldb();
     }
-    
+    //Check Username if already exist
     public boolean checkUsername(String username)
     {
 
@@ -49,7 +49,7 @@ public class CreateAccount extends javax.swing.JFrame {
         }
          return checkUser;
     }
-    
+    //Check Email if already exist
     public boolean checkEmail(String email)
     {
 
@@ -349,7 +349,7 @@ public class CreateAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_verifycodeActionPerformed
 
     private void btn_sendcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sendcodeActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btn_sendcodeActionPerformed
 
     /**
@@ -410,4 +410,5 @@ public class CreateAccount extends javax.swing.JFrame {
     private javax.swing.JTextField txt_username;
     private javax.swing.JTextField txt_verifycode;
     // End of variables declaration//GEN-END:variables
+
 }

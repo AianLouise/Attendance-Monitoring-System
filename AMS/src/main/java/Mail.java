@@ -28,7 +28,7 @@ public class Mail {
         }
    }
 
-   private void sendEmail() throws MessagingException {
+   void sendEmail() throws MessagingException {
 
         String from = "attendancems123@gmail.com";
         String fromPassword = "mmbsodskafhatiqq";
@@ -43,7 +43,7 @@ public class Mail {
 
    }
 
-   private MimeMessage draftEmail() throws AddressException, MessagingException{
+   MimeMessage draftEmail() throws AddressException, MessagingException{
         String to = "2021301205@dhvsu.edu.ph";
         String subject = "Test Mail";
 
@@ -66,7 +66,7 @@ public class Mail {
         
    }
 
-   private void setupSeverProperties() {
+   void setupSeverProperties() {
 
         Properties properties = System.getProperties();
         properties.put("mail.smtp.port", "465");
