@@ -33,11 +33,9 @@ public class CreateAccount extends javax.swing.JFrame {
         conn = AMS.connectmysqldb();
     }
     
-    
     //Check Username if already exist
     public boolean checkUsername(String username)
     {
-
         boolean checkUser = false;
         String query = "SELECT * FROM tb_user WHERE username =?";
         
@@ -109,9 +107,6 @@ public class CreateAccount extends javax.swing.JFrame {
         txt_confirmpassword = new javax.swing.JPasswordField();
         txt_password = new javax.swing.JPasswordField();
         btn_back = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        txt_verifycode = new javax.swing.JTextField();
-        btn_sendcode = new javax.swing.JButton();
 
         jLabel9.setText("Enter Verification Code:");
 
@@ -119,6 +114,11 @@ public class CreateAccount extends javax.swing.JFrame {
 
         txt_lastname.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         txt_lastname.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txt_lastname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_lastnameActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel1.setText("First Name:");
@@ -185,26 +185,6 @@ public class CreateAccount extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel10.setText("Enter Verification Code:");
-
-        txt_verifycode.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        txt_verifycode.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txt_verifycode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_verifycodeActionPerformed(evt);
-            }
-        });
-
-        btn_sendcode.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        btn_sendcode.setText("Send Code");
-        btn_sendcode.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btn_sendcode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_sendcodeActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -221,12 +201,7 @@ public class CreateAccount extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt_verifycode, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_sendcode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txt_email)
@@ -293,13 +268,7 @@ public class CreateAccount extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_confirmpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_verifycode, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_sendcode, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -309,9 +278,9 @@ public class CreateAccount extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
-        
+
         if(txt_lastname.getText().equals("")){
             JOptionPane.showMessageDialog(null,"Add a Last Name");
         }
@@ -333,9 +302,6 @@ public class CreateAccount extends javax.swing.JFrame {
         else if(!txt_password.getText().equals(txt_confirmpassword.getText())){
             JOptionPane.showMessageDialog(null,"Password does not match. Retype it again");
         }
-        else if(txt_verifycode.getText().equals("")){
-            JOptionPane.showMessageDialog(null,"Enter the Verification Code");
-        }
         else if(checkUsername(txt_username.getText()))
         {
             JOptionPane.showMessageDialog(null, "This Username Already Exist");
@@ -345,6 +311,14 @@ public class CreateAccount extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "This Email Already Exist");
         }
         else{
+            //Random Number generator
+            java.util.Random r = new java.util.Random();
+            int start = 10000;
+            int end = 100000;
+            int code = r.nextInt(end-start) + start;
+
+            String token = String.valueOf(code);
+
             String fname = txt_firstname.getText();
             String lname = txt_lastname.getText();
             String mi = txt_middleinitial.getText();
@@ -354,11 +328,22 @@ public class CreateAccount extends javax.swing.JFrame {
             String email = txt_email.getText();
             String pass = txt_password.getText();
             String type = "2";
+ 
             
-            
+            //Send email verification
+            Mail mail = new Mail();
+            mail.setupSeverProperties();
+            try {
+
+                mail.draftEmail(token, email);
+                mail.sendEmail();
+
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
             
             try{
-            String sql = "INSERT INTO tb_user(name, username, email, password, type) VALUES (?,?,?,?,?)";
+                String sql = "INSERT INTO tb_user(name, username, email, password, type, token) VALUES (?,?,?,?,?,?)";
                
                 ps = conn.prepareStatement(sql);
                 
@@ -367,15 +352,18 @@ public class CreateAccount extends javax.swing.JFrame {
                 ps.setString(3, email);
                 ps.setString(4, pass);
                 ps.setString(5, type);
+                ps.setString(6, token);
                 
 //                rs = ps.executeQuery(sql);
                 int k = ps.executeUpdate();
                 
                 if(k==1){
-                    JOptionPane.showMessageDialog(null,"Registration Successfully");
+                    JOptionPane.showMessageDialog(null,"You Registered Successfully");
+                    
                     this.dispose();
-                    Login login = new Login();
-                    login.setVisible(true);
+                    VerifyAccount x = new VerifyAccount();
+                    x.email.setText(txt_email.getText());
+                    x.setVisible(true);
                 }else{
                     JOptionPane.showMessageDialog(null,"Registration Failed");
                 }
@@ -397,27 +385,9 @@ public class CreateAccount extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_btn_backActionPerformed
 
-    private void txt_verifycodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_verifycodeActionPerformed
+    private void txt_lastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_lastnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_verifycodeActionPerformed
-
-    private void btn_sendcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sendcodeActionPerformed
-        java.util.Random r = new java.util.Random();
-        int start = 10000;
-        int end = 100000;
-        int result = r.nextInt(end-start) + start;
-        
-        Mail mail = new Mail();
-        mail.setupSeverProperties();
-        try {
-
-            mail.draftEmail(result);
-            mail.sendEmail();
-    
-        } catch (Exception ex){
-            ex.printStackTrace();
-        }
-    }//GEN-LAST:event_btn_sendcodeActionPerformed
+    }//GEN-LAST:event_txt_lastnameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,10 +426,8 @@ public class CreateAccount extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_back;
-    private javax.swing.JButton btn_sendcode;
     private javax.swing.JButton btn_submit;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -469,13 +437,12 @@ public class CreateAccount extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPasswordField txt_confirmpassword;
-    private javax.swing.JTextField txt_email;
+    public javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_firstname;
     private javax.swing.JTextField txt_lastname;
     private javax.swing.JTextField txt_middleinitial;
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_username;
-    private javax.swing.JTextField txt_verifycode;
     // End of variables declaration//GEN-END:variables
 
 }

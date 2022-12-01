@@ -1,3 +1,11 @@
+
+import com.mycompany.ams.AMS;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -9,11 +17,13 @@
  */
 public class VerifyAccount extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VerifyAccount
-     */
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    
     public VerifyAccount() {
         initComponents();
+        conn = AMS.connectmysqldb();
     }
 
     /**
@@ -28,8 +38,9 @@ public class VerifyAccount extends javax.swing.JFrame {
         btn_verify = new javax.swing.JButton();
         txt_verifycode = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        btn_sendcode = new javax.swing.JButton();
         btn_verify1 = new javax.swing.JButton();
+        email = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         btn_verify.setText("Verify");
 
@@ -41,14 +52,8 @@ public class VerifyAccount extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel1.setText("Enter Verification Code:");
-
-        btn_sendcode.setText("Send Code");
-        btn_sendcode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_sendcodeActionPerformed(evt);
-            }
-        });
 
         btn_verify1.setText("Verify");
         btn_verify1.addActionListener(new java.awt.event.ActionListener() {
@@ -57,34 +62,47 @@ public class VerifyAccount extends javax.swing.JFrame {
             }
         });
 
+        email.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        email.setText("Email here!!");
+
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel2.setText("Verify your Account");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(133, 133, 133))
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txt_verifycode, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_sendcode, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                            .addComponent(btn_verify1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_verifycode, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(194, 194, 194)
+                        .addComponent(btn_verify1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(105, 105, 105)
+                .addGap(37, 37, 37)
+                .addComponent(jLabel2)
+                .addGap(24, 24, 24)
+                .addComponent(email)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_sendcode, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(txt_verifycode))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addComponent(txt_verifycode, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btn_verify1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         pack();
@@ -95,12 +113,45 @@ public class VerifyAccount extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_verifycodeActionPerformed
 
-    private void btn_sendcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sendcodeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_sendcodeActionPerformed
-
     private void btn_verify1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verify1ActionPerformed
-        // TODO add your handling code here:
+        String user = email.getText();
+        
+        try{
+                String sql = "SELECT * FROM tb_user WHERE email='"+user+"' AND token='"+txt_verifycode.getText()+"';";
+               
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery(sql);
+                
+                try{
+                    sql = "UPDATE tb_user SET status = 'Active' WHERE email = '"+user+"';";
+               
+                    ps = conn.prepareStatement(sql);
+                    
+                    int k = ps.executeUpdate();
+
+                    if(k==1){
+                        if(rs.next()){
+                            JOptionPane.showMessageDialog(null,"Verified Successfully");               
+                            this.dispose();
+                            Login login = new Login();
+                            login.setVisible(true);
+                        }else{
+                            conn.close();
+                            JOptionPane.showMessageDialog(null,"Incorrect Username and Password");
+                            txt_verifycode.setText("");
+                        }
+
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Registration Failed");
+                    }
+                    
+                }catch(SQLException e){
+                    JOptionPane.showMessageDialog(null,e);
+                }
+                
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(null,e);
+            }
     }//GEN-LAST:event_btn_verify1ActionPerformed
 
     /**
@@ -139,10 +190,11 @@ public class VerifyAccount extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_sendcode;
     private javax.swing.JButton btn_verify;
     private javax.swing.JButton btn_verify1;
+    public javax.swing.JLabel email;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txt_verifycode;
     // End of variables declaration//GEN-END:variables
 }

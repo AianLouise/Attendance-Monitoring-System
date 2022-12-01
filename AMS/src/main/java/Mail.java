@@ -43,9 +43,10 @@ public class Mail {
 
    }
 
-   MimeMessage draftEmail(int code) throws AddressException, MessagingException{
-        String to = "aianlouisealfaro03@gmail.com";
-        String subject = "Test Mail";
+   MimeMessage draftEmail(String code, String email) throws AddressException, MessagingException{
+        
+        String to = email;
+        String subject = "AMS";
         
         String i = String.valueOf(code);
         
