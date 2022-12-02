@@ -354,7 +354,6 @@ public class CreateAccount extends javax.swing.JFrame {
                 ps.setString(5, type);
                 ps.setString(6, token);
                 
-//                rs = ps.executeQuery(sql);
                 int k = ps.executeUpdate();
                 
                 if(k==1){

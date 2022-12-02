@@ -38,12 +38,7 @@ public class AMS {
     
 
     public static void main(String[] args) {
-        java.util.Random r = new java.util.Random();
-        int start = 10000;
-        int end = 100000;
-        int result = r.nextInt(end-start) + start;
         
-        System.out.println(result);
     }
 
     

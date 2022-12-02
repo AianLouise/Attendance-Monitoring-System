@@ -24,4 +24,4 @@ CREATE TABLE tb_user
 UPDATE tb_user SET status = 'Active' WHERE email = 'aianlouisealfaro03@gmail.com';
 
 INSERT INTO tb_user VALUES
-(1, 'Aian Louise A. Alfaro', 'admin', 'aianlouisealfaro03@gmail.com', 'admin123', '1', '00000', 'Inactive');
+(1, 'Aian Louise A. Alfaro', 'Aian Louise', 'aianlouisealfaro03@gmail.com', 'admin123', '1', '00000', 'Active');

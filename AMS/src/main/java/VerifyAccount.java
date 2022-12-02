@@ -136,8 +136,8 @@ public class VerifyAccount extends javax.swing.JFrame {
                             Login login = new Login();
                             login.setVisible(true);
                         }else{
-                            conn.close();
-                            JOptionPane.showMessageDialog(null,"Incorrect Username and Password");
+                            
+                            JOptionPane.showMessageDialog(null,"Verification Failed");
                             txt_verifycode.setText("");
                         }
 

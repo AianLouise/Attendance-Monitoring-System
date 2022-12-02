@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -24,6 +26,28 @@ public class ForgotPassword extends javax.swing.JFrame {
     public ForgotPassword() {
         initComponents();
         conn = AMS.connectmysqldb();
+    }
+    
+    public boolean checkEmail(String email)
+    {
+
+        boolean checkEmail = false;
+        String query = "SELECT * FROM tb_user WHERE email =?";
+        
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, email);
+            
+            rs = ps.executeQuery();
+            
+            if(rs.next())
+            {
+                checkEmail = true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return checkEmail;
     }
 
     /**
@@ -105,36 +129,52 @@ public class ForgotPassword extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-        if(txt_email.getText().equals("")){
-            JOptionPane.showMessageDialog(null,"Please Enter your Email");
+        if(!checkEmail(txt_email.getText())){
+            JOptionPane.showMessageDialog(null, "Account with this Email Doesn't Exist");
         }else{
+            //Random Number generator
+            java.util.Random r = new java.util.Random();
+            int start = 10000;
+            int end = 100000;
+            int code = r.nextInt(end-start) + start;
+
+            String token = String.valueOf(code);
+            
+            String email = txt_email.getText();
+            
+            //Send email verification
+            Mail mail = new Mail();
+            mail.setupSeverProperties();
+            try {
+
+                mail.draftEmail(token, email);
+                mail.sendEmail();
+
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
+
             try{
-                String sql = "SELECT * FROM tb_user WHERE username='"+txt_username.getText()+"' AND password='"+txt_password.getText()+"';";
-               
+                String sql = "UPDATE tb_user SET token =? WHERE email = '"+email+"';";
+                
                 ps = conn.prepareStatement(sql);
-                rs = ps.executeQuery(sql);
                 
-                if(rs.next()){
-                    JOptionPane.showMessageDialog(null,"Login Successfully");
-                    String userType = rs.getString("type");
-                    
-                    if (userType.equals("1")){
-                        this.dispose();
-                        AdminMenu admin = new AdminMenu();
-                        admin.setVisible(true);
-                      
-                    }else if(userType.equals("2")){
-                        this.dispose();
-                        UserMenu user = new UserMenu();
-                        user.setVisible(true);
-                     
-                    }
-                    
+                ps.setString(1, token);
+                
+                String user = rs.getString("username");
+
+                int k = ps.executeUpdate();
+                
+                if(k==1){
+                    this.dispose();
+                    VerifyEmail x = new VerifyEmail();
+                    x.email.setText(txt_email.getText());
+                    x.username.setText(user);
+                    x.setVisible(true);
                 }else{
-                    conn.close();
-                    JOptionPane.showMessageDialog(null,"Account with that Email Doesn't Exist");
+                    JOptionPane.showMessageDialog(null,"Registration Failed");
                 }
-                
+                                       
             }catch(SQLException e){
                 JOptionPane.showMessageDialog(null,e);
             }
@@ -181,6 +221,6 @@ public class ForgotPassword extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txt_email;
+    public javax.swing.JTextField txt_email;
     // End of variables declaration//GEN-END:variables
 }

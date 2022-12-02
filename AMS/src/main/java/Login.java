@@ -65,7 +65,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        bg.setBackground(new java.awt.Color(255, 255, 255));
+        bg.setBackground(new java.awt.Color(96, 163, 217));
 
         btn_exit.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         btn_exit.setText("Exit");
@@ -76,7 +76,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(98, 135, 224));
+        jPanel1.setBackground(new java.awt.Color(0, 116, 183));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,7 +89,7 @@ public class Login extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel3.setBackground(new java.awt.Color(239, 242, 245));
+        jPanel3.setBackground(new java.awt.Color(191, 215, 237));
 
         txt_username.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         txt_username.setBorder(new javax.swing.border.MatteBorder(null));
@@ -261,6 +261,8 @@ public class Login extends javax.swing.JFrame {
                     if (userType.equals("1")){
                         this.dispose();
                         AdminMenu admin = new AdminMenu();
+                        admin.lbl_user.setText(txt_username.getText());
+                        admin.lbl_name.setText(rs.getString("name"));
                         admin.setVisible(true);
                       
                     }else if(userType.equals("2")){
@@ -271,7 +273,6 @@ public class Login extends javax.swing.JFrame {
                     }
                     
                 }else{
-                    conn.close();
                     JOptionPane.showMessageDialog(null,"Incorrect Username and Password");
                     txt_username.setText("");
                     txt_password.setText("");
