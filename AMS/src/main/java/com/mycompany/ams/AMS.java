@@ -5,6 +5,7 @@
 
 package com.mycompany.ams;
 
+import com.source.main.Login;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -37,7 +38,8 @@ public class AMS {
     
 
     public static void main(String[] args) {
-        
+        Login login = new Login();
+        login.setVisible(true);
     }
 
     

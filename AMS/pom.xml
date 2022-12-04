@@ -36,6 +36,31 @@
             <artifactId>core</artifactId>
             <version>3.3.0</version>
         </dependency>
+        <dependency>
+            <groupId>webcam-capture</groupId>
+            <artifactId>webcam-capture</artifactId>
+            <version>0.3.12</version>
+        </dependency>
+        <dependency>
+            <groupId>bridj-0.6.2-windows-only</groupId>
+            <artifactId>bridj-0.6.2-windows-only</artifactId>
+            <version>0.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j-1.2.17</groupId>
+            <artifactId>log4j-1.2.17</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>slf4j-api-1.6.2</groupId>
+            <artifactId>slf4j-api-1.6.2</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>slf4j-log4j12-1.6.2</groupId>
+            <artifactId>slf4j-log4j12-1.6.2</artifactId>
+            <version>1.6.2</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
