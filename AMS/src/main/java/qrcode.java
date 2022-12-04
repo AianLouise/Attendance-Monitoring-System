@@ -28,6 +28,6 @@ public class qrcode {
     }
     
     public static void main(String[] args) throws WriterException {
-        generateQRcode("AianLouise", 1250, 1250, outputQr);
+        generateQRcode("", 1250, 1250, outputQr);
     }
 }
