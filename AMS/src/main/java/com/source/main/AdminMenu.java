@@ -202,11 +202,12 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btn_scanqrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_scanqrActionPerformed
-        // TODO add your handling code here:
+        ScanQr scan = new ScanQr();
+        scan.setVisible(true);
     }//GEN-LAST:event_btn_scanqrActionPerformed
 
     private void btn_listinfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listinfoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btn_listinfoActionPerformed
 
     private void btn_createqrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createqrActionPerformed

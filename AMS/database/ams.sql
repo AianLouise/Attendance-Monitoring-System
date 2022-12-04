@@ -21,6 +21,15 @@ CREATE TABLE tb_user
     status ENUM('Active','Inactive')
 );
 
+CREATE TABLE tb_student
+(
+	Stud_id INT PRIMARY KEY,
+    fname VARCHAR(55),
+    lname VARCHAR(55),
+    course VARCHAR(55),
+    yearsection VARCHAR(55)
+);
+
 UPDATE tb_user SET status = 'Active' WHERE email = 'aianlouisealfaro03@gmail.com';
 
 INSERT INTO tb_user VALUES
