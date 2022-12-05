@@ -1,5 +1,12 @@
 package com.source.main;
 
+import com.mycompany.ams.AMS;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -11,11 +18,13 @@ package com.source.main;
  */
 public class AdminMenu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AdminMenu
-     */
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    
     public AdminMenu() {
         initComponents();
+        conn = AMS.connectmysqldb();
     }
 
     /**
@@ -36,6 +45,7 @@ public class AdminMenu extends javax.swing.JFrame {
         lbl_user = new javax.swing.JLabel();
         lbl_name = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        btn_settings = new javax.swing.JButton();
         btn_createqr = new javax.swing.JButton();
         btn_scanqr = new javax.swing.JButton();
         btn_listinfo = new javax.swing.JButton();
@@ -78,29 +88,37 @@ public class AdminMenu extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Name:");
 
+        btn_settings.setText("Settings");
+        btn_settings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_settingsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(lbl_user))
-                            .addComponent(jLabel1)
-                            .addComponent(lbl_name)
-                            .addComponent(jLabel3))))
+                        .addComponent(lbl_user))
+                    .addComponent(jLabel1)
+                    .addComponent(lbl_name)
+                    .addComponent(jLabel3))
                 .addContainerGap(68, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_settings, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,9 +135,11 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_name)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(232, 232, 232)
+                .addComponent(btn_settings, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btn_createqr.setBackground(new java.awt.Color(96, 163, 217));
@@ -168,7 +188,7 @@ public class AdminMenu extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(299, Short.MAX_VALUE)
+                .addContainerGap(305, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_createqr, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_scanqr, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,6 +235,34 @@ public class AdminMenu extends javax.swing.JFrame {
         create.setVisible(true);
     }//GEN-LAST:event_btn_createqrActionPerformed
 
+    private void btn_settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_settingsActionPerformed
+        
+        try{
+                String sql = "SELECT * FROM tb_smtp WHERE id = '1';";
+               
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery(sql);
+                
+                if(rs.next()){
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
+                    
+                    SettingsSMTP settings = new SettingsSMTP();
+                    settings.txt_email.setText(email);
+                    settings.txt_password.setText(password);
+                    settings.setVisible(true);
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null,"Incorrect Username and Password");
+                }
+                
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(null,e);
+            }
+        
+        
+    }//GEN-LAST:event_btn_settingsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -255,6 +303,7 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JButton btn_listinfo;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_scanqr;
+    private javax.swing.JButton btn_settings;
     private javax.swing.JButton btn_view;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

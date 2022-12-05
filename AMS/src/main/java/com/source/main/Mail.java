@@ -1,6 +1,11 @@
 package com.source.main;
 
 
+import com.mycompany.ams.AMS;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -12,28 +17,41 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.swing.JOptionPane;
 
 public class Mail {
 
     Session newSession = null;
     MimeMessage mimeMessage = null;
+    
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    
    public static void main(String[] args) {
-//        Mail mail = new Mail();
-//        mail.setupSeverProperties();
-//        try {
-//
-//            mail.draftEmail();
-//            mail.sendEmail();
-//    
-//        } catch (Exception ex){
-//            ex.printStackTrace();
-//        }
+       
    }
-
+   static String email;
+   static String password;
    void sendEmail() throws MessagingException {
-
-        String from = "aianlouisealfaro.iskolar@gmail.com";
-        String fromPassword = "jbbyrkdpmquyplhj";
+        conn = AMS.connectmysqldb();
+        
+        try{
+                String sql = "SELECT * FROM tb_smtp WHERE id = '1';";
+               
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery(sql);
+                
+                if(rs.next()){
+                    email = rs.getString("email");
+                    password = rs.getString("password");
+                }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+        
+        String from = email;
+        String fromPassword = password;
         String emailHost = "smtp.gmail.com";
 
         Transport transport = newSession.getTransport("smtp");

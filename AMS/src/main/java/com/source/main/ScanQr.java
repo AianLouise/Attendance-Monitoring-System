@@ -63,8 +63,7 @@ public class ScanQr extends javax.swing.JFrame implements Runnable, ThreadFactor
     Timer t ;
     SimpleDateFormat st = null ;
     public void times () {
-        
-        
+    
         t = new Timer(0, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
