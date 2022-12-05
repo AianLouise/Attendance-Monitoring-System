@@ -40,9 +40,21 @@ CREATE TABLE tb_attendance
     time VARCHAR(55)
 );
 
+CREATE TABLE tb_smtp(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	email VARCHAR(55),
+    password VARCHAR(55)
+);
+
 UPDATE tb_user SET status = 'Active' WHERE email = 'aianlouisealfaro03@gmail.com';
 
 INSERT INTO tb_user VALUES
 (1, 'Aian Louise A. Alfaro', 'admin', 'aianlouisealfaro03@gmail.com', 'admin123', '1', '00000', 'Active');
 
 INSERT INTO tb_attendance(name, yearsection, date, time) VALUES ('Aian Louise A. Alfaro','BSCS2A','10-12-2022','1');
+
+SELECT * FROM tb_smtp;
+
+INSERT INTO tb_smtp(id, email, password) VALUES(1, 'aian', '123');
+
+UPDATE tb_smtp SET email = '123' WHERE id = '1';
