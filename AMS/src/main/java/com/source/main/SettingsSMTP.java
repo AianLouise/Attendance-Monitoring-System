@@ -163,7 +163,7 @@ public class SettingsSMTP extends javax.swing.JFrame {
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         try{
-                String sql = "SELECT * FROM tb_user WHERE User_Id='1';";
+                String sql = "SELECT * FROM tb_account WHERE User_Id='1';";
                
                 ps = conn.prepareStatement(sql);
                 rs = ps.executeQuery(sql);

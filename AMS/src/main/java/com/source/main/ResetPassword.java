@@ -132,13 +132,13 @@ public class ResetPassword extends javax.swing.JFrame {
         String password = txt_password.getText();
         
         try{
-                String sql = "SELECT * FROM tb_user WHERE User_Id='"+userid+"';";
+                String sql = "SELECT * FROM tb_account WHERE User_Id='"+userid+"';";
                
                 ps = conn.prepareStatement(sql);
                 rs = ps.executeQuery(sql);
                 
                 try{
-                    sql = "UPDATE tb_user SET password = '"+password+"' WHERE User_Id = '"+userid+"';";
+                    sql = "UPDATE tb_account SET password = '"+password+"' WHERE User_Id = '"+userid+"';";
                
                     ps = conn.prepareStatement(sql);
                     

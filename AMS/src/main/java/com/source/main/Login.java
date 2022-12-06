@@ -237,34 +237,39 @@ public class Login extends javax.swing.JFrame {
     private void txt_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passwordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_passwordActionPerformed
-
+    static int id;
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         
         if(txt_username.getText().equals("") || txt_password.getText().equals("")){
             JOptionPane.showMessageDialog(null,"Please Enter Username and Password");
         }else{
             try{
-                String sql = "SELECT * FROM tb_user WHERE username='"+txt_username.getText()+"' AND password='"+txt_password.getText()+"';";
-               
+                String sql = "SELECT * FROM tb_account WHERE username='"+txt_username.getText()+"' AND password='"+txt_password.getText()+"';";
+                
+                
                 ps = conn.prepareStatement(sql);
                 rs = ps.executeQuery(sql);
                 
                 if(rs.next()){
                     JOptionPane.showMessageDialog(null,"Login Successfully");
                     String userType = rs.getString("type");
+                    String status = rs.getString("status");
+                    id = rs.getInt("User_Id");
                     
-                    if (userType.equals("1")){
+                    if (userType.equals("1") && status.equals("Active") ){
                         this.dispose();
                         AdminMenu admin = new AdminMenu();
                         admin.lbl_user.setText(txt_username.getText());
-                        admin.lbl_name.setText(rs.getString("name"));
                         admin.setVisible(true);
                       
-                    }else if(userType.equals("2")){
+                    }else if(userType.equals("2") && status.equals("Active")){
                         this.dispose();
                         UserMenu user = new UserMenu();
+                        user.lbl_user.setText(txt_username.getText());
                         user.setVisible(true);
-                     
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"The Account is Unverified");
                     }
                     
                 }else{

@@ -34,7 +34,7 @@ public class ForgotPassword extends javax.swing.JFrame {
     {
 
         boolean checkEmail = false;
-        String query = "SELECT * FROM tb_user WHERE email =?";
+        String query = "SELECT * FROM tb_account WHERE email =?";
         
         try {
             ps = conn.prepareStatement(query);
@@ -157,7 +157,7 @@ public class ForgotPassword extends javax.swing.JFrame {
             }
 
             try{
-                String sql = "UPDATE tb_user SET token =? WHERE email = '"+email+"';";
+                String sql = "UPDATE tb_account SET token =? WHERE email = '"+email+"';";
                 
                 ps = conn.prepareStatement(sql);
                 

@@ -39,7 +39,7 @@ public class CreateAccount extends javax.swing.JFrame {
     public boolean checkUsername(String username)
     {
         boolean checkUser = false;
-        String query = "SELECT * FROM tb_user WHERE username =?";
+        String query = "SELECT * FROM tb_account WHERE username =?";
         
         try {
             ps = conn.prepareStatement(query);
@@ -61,7 +61,7 @@ public class CreateAccount extends javax.swing.JFrame {
     {
 
         boolean checkEmail = false;
-        String query = "SELECT * FROM tb_user WHERE email =?";
+        String query = "SELECT * FROM tb_account WHERE email =?";
         
         try {
             ps = conn.prepareStatement(query);
@@ -338,7 +338,7 @@ public class CreateAccount extends javax.swing.JFrame {
             }
             
             try{
-                String sql = "INSERT INTO tb_user(name, username, email, password, type, token) VALUES (?,?,?,?,?,?)";
+                String sql = "INSERT INTO tb_account(name, username, email, password, type, token) VALUES (?,?,?,?,?,?)";
                
                 ps = conn.prepareStatement(sql);
                 

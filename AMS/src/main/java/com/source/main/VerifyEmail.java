@@ -140,7 +140,7 @@ public class VerifyEmail extends javax.swing.JFrame {
         
 
         try{
-            String sql = "SELECT * FROM tb_user WHERE email='"+user+"' AND token='"+txt_verifycode.getText()+"';";
+            String sql = "SELECT * FROM tb_account WHERE email='"+user+"' AND token='"+txt_verifycode.getText()+"';";
 
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery(sql);

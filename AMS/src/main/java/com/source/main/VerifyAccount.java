@@ -119,13 +119,13 @@ public class VerifyAccount extends javax.swing.JFrame {
         String user = email.getText();
         
         try{
-                String sql = "SELECT * FROM tb_user WHERE email='"+user+"' AND token='"+txt_verifycode.getText()+"';";
+                String sql = "SELECT * FROM tb_account WHERE email='"+user+"' AND token='"+txt_verifycode.getText()+"';";
                
                 ps = conn.prepareStatement(sql);
                 rs = ps.executeQuery(sql);
                 
                 try{
-                    sql = "UPDATE tb_user SET status = 'Active' WHERE email = '"+user+"';";
+                    sql = "UPDATE tb_account SET status = 'Active' WHERE email = '"+user+"';";
                
                     ps = conn.prepareStatement(sql);
                     

@@ -9,7 +9,7 @@ SELECT * FROM tb_student;
 
 DELETE FROM tb_student where Stud_Id = 'a';
 
-CREATE TABLE tb_user
+CREATE TABLE tb_account
 (
 	User_Id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(55),
@@ -46,15 +46,17 @@ CREATE TABLE tb_smtp(
     password VARCHAR(55)
 );
 
-UPDATE tb_user SET status = 'Active' WHERE email = 'aianlouisealfaro03@gmail.com';
+INSERT INTO tb_smtp(id, email, password) VALUES(1, 'sampleonly712@gmail.com', 'mkqyxuuepaxhaafn');
 
-INSERT INTO tb_user VALUES
+INSERT INTO tb_account VALUES
 (1, 'Aian Louise A. Alfaro', 'admin1', 'aianlouisealfaro03@gmail.com', 'admin123', '1', '00000', 'Active');
+
+
 
 INSERT INTO tb_attendance(name, yearsection, date, time) VALUES ('Aian Louise A. Alfaro','BSCS2A','10-12-2022','1');
 
-SELECT * FROM tb_smtp;
+UPDATE tb_user SET status = 'Active' WHERE email = 'aianlouisealfaro03@gmail.com';
 
-INSERT INTO tb_smtp(id, email, password) VALUES(1, 'sampleonly712@gmail.com', 'mkqyxuuepaxhaafn');
+SELECT * FROM tb_smtp;
 
 UPDATE tb_smtp SET email = 'aian' AND password = '123' WHERE id = '1';
