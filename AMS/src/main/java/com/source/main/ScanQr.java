@@ -14,6 +14,7 @@ import com.mycompany.ams.AMS;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -162,6 +163,11 @@ public class ScanQr extends javax.swing.JFrame implements Runnable, ThreadFactor
                 txt_nameActionPerformed(evt);
             }
         });
+        txt_name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_nameKeyPressed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel2.setText("Input Year/Section:");
@@ -273,10 +279,7 @@ public class ScanQr extends javax.swing.JFrame implements Runnable, ThreadFactor
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Student Name", "Course", "Year and Section", "Date", "Time"
@@ -309,7 +312,7 @@ public class ScanQr extends javax.swing.JFrame implements Runnable, ThreadFactor
     }//GEN-LAST:event_btn_closeActionPerformed
 
     private void txt_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nameActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txt_nameActionPerformed
 
     private void txt_yearsectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_yearsectionActionPerformed
@@ -321,7 +324,7 @@ public class ScanQr extends javax.swing.JFrame implements Runnable, ThreadFactor
          if(txt_name.getText().equals("")){
             JOptionPane.showMessageDialog(null,"Scan your QR ID");
         }else{
-        
+  
         String name = txt_name.getText();
         String course = txt_course.getText();
         String yearsection = txt_yearsection.getText();
@@ -377,6 +380,63 @@ public class ScanQr extends javax.swing.JFrame implements Runnable, ThreadFactor
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_courseActionPerformed
 
+    private void txt_nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nameKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+                if(txt_name.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"Scan your QR ID");
+            }else{
+
+            String name = txt_name.getText();
+            String course = txt_course.getText();
+            String yearsection = txt_yearsection.getText();
+            String date = lbl_date.getText();
+            String time = lbl_time.getText();
+
+            try{
+                    String sql = "INSERT INTO tb_attendance(name, course, yearsection, date, time) VALUES (?,?,?,?,?)";
+
+                    ps = conn.prepareStatement(sql);
+
+                    ps.setString(1, name);
+                    ps.setString(2, course);
+                    ps.setString(3, yearsection);
+                    ps.setString(4, date);
+                    ps.setString(5, time);
+
+                    int k = ps.executeUpdate();
+
+                    if(k==1){
+
+                        JOptionPane.showMessageDialog(null,"Attendance Registered Successfully");
+
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Registration Failed");
+                    }   
+            }catch(SQLException e){
+                    JOptionPane.showMessageDialog(null,e);
+            }
+
+            try{
+                String sql = "SELECT * FROM tb_attendance";
+
+                    ps = conn.prepareStatement(sql);
+                    rs = ps.executeQuery(sql);
+
+                    DefaultTableModel tm = (DefaultTableModel)jTable1.getModel();
+                    tm.setRowCount(0);
+
+                    while(rs.next()){
+                        Object o[]={rs.getInt("attend_id"),rs.getString("name"), rs.getString("course"), rs.getString("yearsection"), rs.getString("date"), rs.getString("time")};
+                        tm.addRow(o);
+                    }
+
+            }catch(SQLException e){
+                    JOptionPane.showMessageDialog(null,e);
+            }
+            }
+        }
+    }//GEN-LAST:event_txt_nameKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -427,7 +487,7 @@ public class ScanQr extends javax.swing.JFrame implements Runnable, ThreadFactor
             try {
                 result = new MultiFormatReader().decodeWithState(bitmap);
             } catch (NotFoundException ex) {
-                Logger.getLogger(ScanQr.class.getName()).log(Level.SEVERE, "here", ex);
+                Logger.getLogger(ScanQr.class.getName()).log(Level.SEVERE, "Scanning...", ex);
             }
             
             if(result != null){
