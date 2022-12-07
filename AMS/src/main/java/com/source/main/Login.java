@@ -93,7 +93,7 @@ public class Login extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(191, 215, 237));
 
         txt_username.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
-        txt_username.setBorder(new javax.swing.border.MatteBorder(null));
+        txt_username.setBorder(null);
         txt_username.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txt_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +107,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 12)); // NOI18N
         jLabel3.setText("Password");
 
-        txt_password.setBorder(new javax.swing.border.MatteBorder(null));
+        txt_password.setBorder(null);
         txt_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_passwordActionPerformed(evt);
@@ -255,7 +255,6 @@ public class Login extends javax.swing.JFrame {
                 rs = ps.executeQuery(sql);
                 
                 if(rs.next()){
-                    JOptionPane.showMessageDialog(null,"Login Successfully");
                     String userType = rs.getString("type");
                     String status = rs.getString("status");
                     String username = rs.getString("username");
@@ -275,6 +274,7 @@ public class Login extends javax.swing.JFrame {
                     int value = id;
                     
                     if (userType.equals("1") && status.equals("Active") ){
+                        JOptionPane.showMessageDialog(null,"Login Successfully");
                         this.dispose();
                         AdminMenu admin = new AdminMenu();
                         admin.lbl_user.setText(txt_username.getText());
@@ -287,6 +287,7 @@ public class Login extends javax.swing.JFrame {
                          admin.setVisible(true);
                       
                     }else if(userType.equals("2") && status.equals("Active")){
+                        JOptionPane.showMessageDialog(null,"Login Successfully");
                         this.dispose();
                         UserMenu user = new UserMenu();
                         user.lbl_user.setText(txt_username.getText());
