@@ -1,10 +1,15 @@
 package com.source.main;
 
 import com.mycompany.ams.AMS;
+import static com.source.main.Login.id;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 
 public class UserMenu extends javax.swing.JFrame {
@@ -26,7 +31,7 @@ public class UserMenu extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        btn_logout1 = new javax.swing.JButton();
+        btn_logout = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -34,18 +39,21 @@ public class UserMenu extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btn_profile = new javax.swing.JLabel();
+        btn_logs = new javax.swing.JButton();
         btn_scanqr = new javax.swing.JButton();
         btn_view = new javax.swing.JButton();
         btn_listinfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setBackground(new java.awt.Color(191, 215, 237));
+
         jPanel1.setBackground(new java.awt.Color(0, 116, 183));
 
-        btn_logout1.setText("Logout");
-        btn_logout1.addActionListener(new java.awt.event.ActionListener() {
+        btn_logout.setText("Logout");
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_logout1ActionPerformed(evt);
+                btn_logoutActionPerformed(evt);
             }
         });
 
@@ -78,14 +86,17 @@ public class UserMenu extends javax.swing.JFrame {
             }
         });
 
+        btn_logs.setText("Activity Logs");
+        btn_logs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_logout1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -98,17 +109,24 @@ public class UserMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(47, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_user))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(btn_profile))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel3)))
-                .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbl_user))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(btn_profile))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel3)))
+                        .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_logs, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,12 +145,16 @@ public class UserMenu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(lbl_user))
-                .addGap(186, 186, 186)
-                .addComponent(btn_logout1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(135, 135, 135)
+                .addComponent(btn_logs, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
         btn_scanqr.setBackground(new java.awt.Color(96, 163, 217));
+        btn_scanqr.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        btn_scanqr.setForeground(new java.awt.Color(255, 255, 255));
         btn_scanqr.setText("Scan QR for Attendance");
         btn_scanqr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +163,9 @@ public class UserMenu extends javax.swing.JFrame {
         });
 
         btn_view.setBackground(new java.awt.Color(96, 163, 217));
-        btn_view.setText("View Attendance Record");
+        btn_view.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        btn_view.setForeground(new java.awt.Color(255, 255, 255));
+        btn_view.setText("List of Student Information");
         btn_view.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_viewActionPerformed(evt);
@@ -149,7 +173,9 @@ public class UserMenu extends javax.swing.JFrame {
         });
 
         btn_listinfo.setBackground(new java.awt.Color(96, 163, 217));
-        btn_listinfo.setText("List of Student Information");
+        btn_listinfo.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        btn_listinfo.setForeground(new java.awt.Color(255, 255, 255));
+        btn_listinfo.setText("View Attendance Record");
         btn_listinfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_listinfoActionPerformed(evt);
@@ -162,13 +188,13 @@ public class UserMenu extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
-                .addComponent(btn_scanqr, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(btn_view, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(btn_listinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 219, Short.MAX_VALUE))
+                .addGap(128, 128, 128)
+                .addComponent(btn_scanqr, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_view)
+                .addGap(18, 18, 18)
+                .addComponent(btn_listinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 147, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +205,7 @@ public class UserMenu extends javax.swing.JFrame {
                     .addComponent(btn_view, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_scanqr, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_listinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(245, 245, 245))
+                .addGap(208, 208, 208))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,11 +223,52 @@ public class UserMenu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_logout1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logout1ActionPerformed
-        this.dispose();
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
         Login login = new Login();
-        login.setVisible(true);
-    }//GEN-LAST:event_btn_logout1ActionPerformed
+        try{
+                String sql = "SELECT * FROM tb_account WHERE User_Id='"+login.id+"';";
+                
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery(sql);
+                
+                if(rs.next()){
+                    JOptionPane.showMessageDialog(null,"Logged Out Successfully");
+                    String userType = rs.getString("type");
+                    String username = rs.getString("username");
+                    id = rs.getInt("User_Id");
+                    
+                    //date
+                    Date currentDate = GregorianCalendar.getInstance().getTime();
+                    DateFormat df = DateFormat.getDateInstance();
+                    String dateString = df.format(currentDate);
+                        
+                    //time
+                    Date d = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                    String timeString = sdf.format(d);
+                        
+                    String value0 = timeString;
+                    String values = dateString;
+                        
+                    int value = id;
+
+                        String reg = "INSERT INTO tb_logs(user_id,username,date,status) VALUES ('"+value+"','"+username+"','"+value0+" / "+values+"','Logged Out')";
+                                
+                        ps = conn.prepareStatement(reg);
+                        ps.execute();
+                        
+                        this.dispose();
+        
+                        login.setVisible(true);
+                    
+                }else{
+
+                }
+                
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(null,e);
+            }
+    }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btn_profileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_profileMouseClicked
         Login login = new Login();
@@ -240,13 +307,19 @@ public class UserMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_scanqrActionPerformed
 
     private void btn_listinfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listinfoActionPerformed
-
+        AttendanceReport report = new AttendanceReport();
+        report.setVisible(true);
     }//GEN-LAST:event_btn_listinfoActionPerformed
 
     private void btn_viewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_viewActionPerformed
         StudentRecord record = new StudentRecord();
         record.setVisible(true);
     }//GEN-LAST:event_btn_viewActionPerformed
+
+    private void btn_logsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logsActionPerformed
+        ActivityLogs logs = new ActivityLogs();
+        logs.setVisible(true);
+    }//GEN-LAST:event_btn_logsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,7 +358,8 @@ public class UserMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_listinfo;
-    private javax.swing.JButton btn_logout1;
+    private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_logs;
     private javax.swing.JLabel btn_profile;
     private javax.swing.JButton btn_scanqr;
     private javax.swing.JButton btn_view;

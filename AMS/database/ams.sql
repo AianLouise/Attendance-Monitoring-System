@@ -7,7 +7,7 @@ USE ams;
 
 SELECT * FROM tb_student;
 
-DELETE FROM tb_student where Stud_Id = 'a';
+DELETE FROM tb_account;
 
 CREATE TABLE tb_account
 (
@@ -46,11 +46,20 @@ CREATE TABLE tb_smtp(
     password VARCHAR(55)
 );
 
+CREATE TABLE tb_logs(
+	log_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    username VARCHAR(55),
+    date VARCHAR(55),
+    status VARCHAR(55)
+);
+
 INSERT INTO tb_smtp(id, email, password) VALUES(1, 'sampleonly712@gmail.com', 'mkqyxuuepaxhaafn');
 
 INSERT INTO tb_account VALUES
-(1, 'Aian Louise A. Alfaro', 'admin1', 'aianlouisealfaro03@gmail.com', 'admin123', '1', '00000', 'Active');
-
+(1, 'admin', 'admin1', 'aianlouisealfaro03@gmail.com', 'admin123', '1', '00000', 'Active');
+INSERT INTO tb_account VALUES
+(2, 'user', 'user1', 'aianlouisealfaro.iskolar@gmail.com', 'user123', '2', '00000', 'Active');
 
 
 INSERT INTO tb_attendance(name, yearsection, date, time) VALUES ('Aian Louise A. Alfaro','BSCS2A','10-12-2022','1');

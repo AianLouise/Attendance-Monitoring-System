@@ -1,10 +1,15 @@
 package com.source.main;
 
 import com.mycompany.ams.AMS;
+import static com.source.main.Login.id;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 
 public class AdminMenu extends javax.swing.JFrame {
@@ -158,6 +163,8 @@ public class AdminMenu extends javax.swing.JFrame {
         );
 
         btn_createqr.setBackground(new java.awt.Color(96, 163, 217));
+        btn_createqr.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        btn_createqr.setForeground(new java.awt.Color(255, 255, 255));
         btn_createqr.setText("Create QR Code for Student");
         btn_createqr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,6 +173,8 @@ public class AdminMenu extends javax.swing.JFrame {
         });
 
         btn_scanqr.setBackground(new java.awt.Color(96, 163, 217));
+        btn_scanqr.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        btn_scanqr.setForeground(new java.awt.Color(255, 255, 255));
         btn_scanqr.setText("Scan QR for Attendance");
         btn_scanqr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,7 +183,9 @@ public class AdminMenu extends javax.swing.JFrame {
         });
 
         btn_listinfo.setBackground(new java.awt.Color(96, 163, 217));
-        btn_listinfo.setText("List of Student Information");
+        btn_listinfo.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        btn_listinfo.setForeground(new java.awt.Color(255, 255, 255));
+        btn_listinfo.setText("View Student Attendance");
         btn_listinfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_listinfoActionPerformed(evt);
@@ -182,7 +193,9 @@ public class AdminMenu extends javax.swing.JFrame {
         });
 
         btn_view.setBackground(new java.awt.Color(96, 163, 217));
-        btn_view.setText("View Attendance Record");
+        btn_view.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        btn_view.setForeground(new java.awt.Color(255, 255, 255));
+        btn_view.setText("List of Student Information");
         btn_view.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_viewActionPerformed(evt);
@@ -195,15 +208,15 @@ public class AdminMenu extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_view, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_createqr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(25, 25, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_scanqr, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                    .addComponent(btn_listinfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(205, 205, 205))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_listinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_scanqr, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(188, 188, 188))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,9 +251,50 @@ public class AdminMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
-        this.dispose();
         Login login = new Login();
-        login.setVisible(true);
+        try{
+                String sql = "SELECT * FROM tb_account WHERE User_Id='"+login.id+"';";
+                
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery(sql);
+                
+                if(rs.next()){
+                    JOptionPane.showMessageDialog(null,"Logged Out Successfully");
+                    String userType = rs.getString("type");
+                    String username = rs.getString("username");
+                    id = rs.getInt("User_Id");
+                    
+                    //date
+                    Date currentDate = GregorianCalendar.getInstance().getTime();
+                    DateFormat df = DateFormat.getDateInstance();
+                    String dateString = df.format(currentDate);
+                        
+                    //time
+                    Date d = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                    String timeString = sdf.format(d);
+                        
+                    String value0 = timeString;
+                    String values = dateString;
+                        
+                    int value = id;
+
+                        String reg = "INSERT INTO tb_logs(user_id,username,date,status) VALUES ('"+value+"','"+username+"','"+value0+" / "+values+"','Logged Out')";
+                                
+                        ps = conn.prepareStatement(reg);
+                        ps.execute();
+                        
+                        this.dispose();
+        
+                        login.setVisible(true);
+                    
+                }else{
+
+                }
+                
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(null,e);
+            }
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btn_scanqrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_scanqrActionPerformed
@@ -249,7 +303,8 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_scanqrActionPerformed
 
     private void btn_listinfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listinfoActionPerformed
-        
+        AttendanceReport report = new AttendanceReport();
+        report.setVisible(true);
     }//GEN-LAST:event_btn_listinfoActionPerformed
 
     private void btn_createqrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createqrActionPerformed

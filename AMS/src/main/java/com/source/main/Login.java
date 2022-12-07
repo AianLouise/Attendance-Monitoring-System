@@ -6,6 +6,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 
 
@@ -254,18 +258,44 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Login Successfully");
                     String userType = rs.getString("type");
                     String status = rs.getString("status");
+                    String username = rs.getString("username");
                     id = rs.getInt("User_Id");
+                    
+                    Date currentDate = GregorianCalendar.getInstance().getTime();
+                    DateFormat df = DateFormat.getDateInstance();
+                    String dateString = df.format(currentDate);
+                        
+                    Date d = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                    String timeString = sdf.format(d);
+                        
+                    String value0 = timeString;
+                    String values = dateString;
+                        
+                    int value = id;
                     
                     if (userType.equals("1") && status.equals("Active") ){
                         this.dispose();
                         AdminMenu admin = new AdminMenu();
                         admin.lbl_user.setText(txt_username.getText());
-                        admin.setVisible(true);
+                        
+                        String reg = "INSERT INTO tb_logs(user_id,username,date,status) VALUES ('"+value+"','"+username+"','"+value0+" / "+values+"','Logged in')";
+                                
+                        ps = conn.prepareStatement(reg);
+                        ps.execute();
+                         
+                         admin.setVisible(true);
                       
                     }else if(userType.equals("2") && status.equals("Active")){
                         this.dispose();
                         UserMenu user = new UserMenu();
                         user.lbl_user.setText(txt_username.getText());
+                        
+                        String reg = "INSERT INTO tb_logs(user_id,username,date,status) VALUES ('"+value+"','"+username+"','"+value0+" / "+values+"','Logged in')";
+                                
+                        ps = conn.prepareStatement(reg);
+                        ps.execute();
+                        
                         user.setVisible(true);
                     }
                     else{
