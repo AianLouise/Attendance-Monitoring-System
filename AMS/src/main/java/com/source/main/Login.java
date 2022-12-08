@@ -258,6 +258,7 @@ public class Login extends javax.swing.JFrame {
                     String userType = rs.getString("type");
                     String status = rs.getString("status");
                     String username = rs.getString("username");
+                    String email = rs.getString("email");
                     id = rs.getInt("User_Id");
                     
                     Date currentDate = GregorianCalendar.getInstance().getTime();
@@ -301,6 +302,49 @@ public class Login extends javax.swing.JFrame {
                     }
                     else{
                         JOptionPane.showMessageDialog(null,"The Account is Unverified");
+                        
+                        //Random Number generator
+                        java.util.Random r = new java.util.Random();
+                        int start = 10000;
+                        int end = 100000;
+                        int code = r.nextInt(end-start) + start;
+
+                        String token = String.valueOf(code);
+                        
+                        JOptionPane.showMessageDialog(null,"Redirecting in Email Verification Page");   
+                        
+                        //Send email verification
+                        Mail mail = new Mail();
+                        mail.setupSeverProperties();
+                        try {
+
+                            mail.draftEmail(token, email);
+                            mail.sendEmail();
+
+                        } catch (Exception ex){
+                            ex.printStackTrace();
+                        }
+                        
+                        try{
+                            sql = "UPDATE tb_account SET token = '"+token+"' WHERE User_Id = '"+id+"';";
+                            
+                            ps = conn.prepareStatement(sql);
+                    
+                            int k = ps.executeUpdate();
+                            
+                            
+                              
+                            this.dispose();
+                            VerifyAccount x = new VerifyAccount();
+                            x.email.setText(email);
+                            x.setVisible(true);
+                            
+                            
+                        }catch(Exception e){
+                            JOptionPane.showMessageDialog(null,e);
+                        }
+                        
+                        
                     }
                     
                 }else{

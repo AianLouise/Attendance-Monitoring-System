@@ -148,7 +148,7 @@ public class ResetPassword extends javax.swing.JFrame {
                 rs = ps.executeQuery(sql);
                 
                 try{
-                    sql = "UPDATE tb_account SET password = '"+password+"' WHERE User_Id = '"+userid+"';";
+                    sql = "UPDATE tb_account SET password = '"+password+"' , status = 'Active'  WHERE User_Id = '"+userid+"';";
                
                     ps = conn.prepareStatement(sql);
                     

@@ -9,6 +9,8 @@ SELECT * FROM tb_student;
 
 DELETE FROM tb_account;
 
+DELETE FROM tb_attendance;
+
 CREATE TABLE tb_account
 (
 	User_Id INT PRIMARY KEY AUTO_INCREMENT,

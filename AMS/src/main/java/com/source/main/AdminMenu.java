@@ -64,22 +64,23 @@ public class AdminMenu extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        btn_logout = new javax.swing.JButton();
+        btn_manage = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lbl_user = new javax.swing.JLabel();
         btn_settings = new javax.swing.JButton();
         btn_logout1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btn_profile = new javax.swing.JLabel();
+        btn_logout2 = new javax.swing.JButton();
         btn_createqr = new javax.swing.JButton();
         btn_scanqr = new javax.swing.JButton();
         btn_listinfo = new javax.swing.JButton();
         btn_view = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         lbl_date = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -88,37 +89,39 @@ public class AdminMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(191, 215, 237));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1159, 696));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 116, 183));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_logout.setText("Logout");
-        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+        btn_manage.setText("Manage Users");
+        btn_manage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_logoutActionPerformed(evt);
+                btn_manageActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 770, 132, 39));
+        jPanel1.add(btn_manage, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 550, 132, 39));
 
-        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Dashboard");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 182, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Logged as:     admin");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 392, -1, -1));
+        jLabel1.setText("Logged as:   Admin");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Username:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 424, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
 
         lbl_user.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         lbl_user.setForeground(new java.awt.Color(255, 255, 255));
         lbl_user.setText("user here!");
-        jPanel1.add(lbl_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 424, -1, -1));
+        jPanel1.add(lbl_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, -1, -1));
 
         btn_settings.setText("Settings");
         btn_settings.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +129,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 btn_settingsActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 719, 132, 39));
+        jPanel1.add(btn_settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 650, 132, 39));
 
         btn_logout1.setText("Activity Logs");
         btn_logout1.addActionListener(new java.awt.event.ActionListener() {
@@ -134,13 +137,10 @@ public class AdminMenu extends javax.swing.JFrame {
                 btn_logout1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_logout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 662, 132, 39));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\aianl\\Documents\\NetBeansProjects\\AMS\\icon\\logo 0.4.png")); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 44, -1, -1));
+        jPanel1.add(btn_logout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 600, 132, 39));
 
         jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\aianl\\Documents\\NetBeansProjects\\AMS\\icon\\admin 0.3.png")); // NOI18N
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 246, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
 
         btn_profile.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
         btn_profile.setForeground(new java.awt.Color(255, 255, 255));
@@ -150,7 +150,17 @@ public class AdminMenu extends javax.swing.JFrame {
                 btn_profileMouseClicked(evt);
             }
         });
-        jPanel1.add(btn_profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 348, -1, -1));
+        jPanel1.add(btn_profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
+
+        btn_logout2.setText("Logout");
+        btn_logout2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logout2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_logout2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 700, 132, 39));
+
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 244, 824));
 
         btn_createqr.setBackground(new java.awt.Color(96, 163, 217));
         btn_createqr.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -162,6 +172,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 btn_createqrActionPerformed(evt);
             }
         });
+        jPanel2.add(btn_createqr, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 405, -1, 137));
 
         btn_scanqr.setBackground(new java.awt.Color(96, 163, 217));
         btn_scanqr.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -173,6 +184,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 btn_scanqrActionPerformed(evt);
             }
         });
+        jPanel2.add(btn_scanqr, new org.netbeans.lib.awtextra.AbsoluteConstraints(704, 405, 283, 137));
 
         btn_listinfo.setBackground(new java.awt.Color(96, 163, 217));
         btn_listinfo.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -184,6 +196,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 btn_listinfoActionPerformed(evt);
             }
         });
+        jPanel2.add(btn_listinfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(704, 568, 283, 137));
 
         btn_view.setBackground(new java.awt.Color(96, 163, 217));
         btn_view.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -195,6 +208,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 btn_viewActionPerformed(evt);
             }
         });
+        jPanel2.add(btn_view, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 568, 283, 137));
 
         jPanel3.setBackground(new java.awt.Color(102, 153, 255));
 
@@ -202,22 +216,30 @@ public class AdminMenu extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Attendance Monitoring System");
 
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\aianl\\Documents\\NetBeansProjects\\AMS\\icon\\logo 0.25.png")); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(108, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel5)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel7)
-                .addGap(108, 108, 108))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel7)
-                .addContainerGap(16, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(11, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel5))
+                .addContainerGap())
         );
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 920, -1));
 
         jPanel4.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -242,6 +264,8 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 130, -1, -1));
+
         jPanel5.setBackground(new java.awt.Color(153, 204, 255));
 
         lbl_time.setFont(new java.awt.Font("Bahnschrift", 0, 48)); // NOI18N
@@ -265,53 +289,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59))
-                            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(231, 231, 231))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btn_view, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_createqr))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_scanqr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_listinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_createqr, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_scanqr, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_view, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_listinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 240, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -322,7 +300,7 @@ public class AdminMenu extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -413,52 +391,57 @@ public class AdminMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_settingsActionPerformed
 
-    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+    private void btn_manageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_manageActionPerformed
+        ManageUsers manage = new ManageUsers();
+        manage.setVisible(true);
+    }//GEN-LAST:event_btn_manageActionPerformed
+
+    private void btn_logout2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logout2ActionPerformed
         Login login = new Login();
         try{
-            String sql = "SELECT * FROM tb_account WHERE User_Id='"+login.id+"';";
+                String sql = "SELECT * FROM tb_account WHERE User_Id='"+login.id+"';";
+                
+                ps = conn.prepareStatement(sql);
+                rs = ps.executeQuery(sql);
+                
+                if(rs.next()){
+                    JOptionPane.showMessageDialog(null,"Logged Out Successfully");
+                    String userType = rs.getString("type");
+                    String username = rs.getString("username");
+                    id = rs.getInt("User_Id");
+                    
+                    //date
+                    Date currentDate = GregorianCalendar.getInstance().getTime();
+                    DateFormat df = DateFormat.getDateInstance();
+                    String dateString = df.format(currentDate);
+                        
+                    //time
+                    Date d = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                    String timeString = sdf.format(d);
+                        
+                    String value0 = timeString;
+                    String values = dateString;
+                        
+                    int value = id;
 
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery(sql);
+                        String reg = "INSERT INTO tb_logs(user_id,username,date,status) VALUES ('"+value+"','"+username+"','"+value0+" / "+values+"','Logged Out')";
+                                
+                        ps = conn.prepareStatement(reg);
+                        ps.execute();
+                        
+                        this.dispose();
+        
+                        login.setVisible(true);
+                    
+                }else{
 
-            if(rs.next()){
-                JOptionPane.showMessageDialog(null,"Logged Out Successfully");
-                String userType = rs.getString("type");
-                String username = rs.getString("username");
-                id = rs.getInt("User_Id");
-
-                //date
-                Date currentDate = GregorianCalendar.getInstance().getTime();
-                DateFormat df = DateFormat.getDateInstance();
-                String dateString = df.format(currentDate);
-
-                //time
-                Date d = new Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                String timeString = sdf.format(d);
-
-                String value0 = timeString;
-                String values = dateString;
-
-                int value = id;
-
-                String reg = "INSERT INTO tb_logs(user_id,username,date,status) VALUES ('"+value+"','"+username+"','"+value0+" / "+values+"','Logged Out')";
-
-                ps = conn.prepareStatement(reg);
-                ps.execute();
-
-                this.dispose();
-
-                login.setVisible(true);
-
-            }else{
-
+                }
+                
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(null,e);
             }
-
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null,e);
-        }
-    }//GEN-LAST:event_btn_logoutActionPerformed
+    }//GEN-LAST:event_btn_logout2ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -495,8 +478,9 @@ public class AdminMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_createqr;
     private javax.swing.JButton btn_listinfo;
-    private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_logout1;
+    private javax.swing.JButton btn_logout2;
+    private javax.swing.JButton btn_manage;
     private javax.swing.JLabel btn_profile;
     private javax.swing.JButton btn_scanqr;
     private javax.swing.JButton btn_settings;
